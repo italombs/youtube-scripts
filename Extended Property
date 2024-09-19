@@ -1,0 +1,21 @@
+EXEC sys.sp_addextendedproperty
+    @name = N'MS_Description', --TITULO
+    @value = N'Date and time the record was last updated.', --DESCRICAO
+    @level0type = N'SCHEMA', --FIXO: SCHEMA
+    @level0name = N'dbo', --NOME DO SCHEMA
+    @level1type = N'TABLE', --OBJETO (TABLE, VIEW, PROCEDURE, ...)
+    @level1name = N'Category', --NOME DO OBJETO
+    @level2type = N'COLUMN', --ATRIBUTO DO OBJETO
+    @level2name = N'CategoryID'; --NOME DO ATRIBUTO
+GO
+
+
+SELECT objtype, objname, value
+FROM fn_listextendedproperty
+('Description', 'schema', 'dbo', 'table', default, NULL, NULL)
+
+
+
+SELECT objtype, objname, value
+FROM fn_listextendedproperty
+('Description', 'schema', 'dbo', 'table', 'Category', 'column', default) 
